@@ -1,70 +1,4 @@
-%% INITIALIZATION
-clear
-close all
-clc
-%% Setup the map
-% Load the map from the wall file. Each line, except the two last, in the
-% wall file is an obstacle. The position of the obstacle is defined in the
-% wall file by its x y z coordinates. The three last elements is
-% the size of the maze, the starting position and goal position
-load('maze/exercise_4_files/wall.txt')
-addpath('maze/exercise_4_files')
-% If a different named file is used, then write it into the wall variable
-% e.g. wall = maze_2;
-wall = wall;
-% Define the map size
-max_x = wall(length(wall) - 2, 1);
-max_y = wall(length(wall) - 2, 2);
-max_z = wall(length(wall) - 2, 3);
-map = zeros(max_x, max_y, max_z);
-map = zeros(max_x, max_y, max_z);
-% Input the obstacles into the map
-for i = 1:(length(wall) - 3)
-    map = gen_square3d([wall(i, 1) wall(i, 1) + 1;...
-                        wall(i, 2) wall(i, 2) + 1;...
-                        wall(i, 3) wall(i, 3) + 1], map);
-end
-%% SIMULATION PARAMETERS
-
-[route,start,end_]=astar_3d1(map,'E','A');
-%makes sure end and start is not 1
-map(start(1), start(2), start(3)) = 0;
-map(end_(1), end_(2), end_(3)) = 0;
-wall_color = [0.8 0.2 0.2];
-sample_time = 4e-2;
-publish_rate = 1 * sample_time;
-x0 = 36;
-y0 = 80;
-z0 = 1;
-g = 9.80665 ;
-mass_drone = 0.68 ;
-mass_rod = 0.0;
-mass_tip = 0;
-mass_total = mass_drone + mass_rod + mass_tip;
-stiffness_rod = 100 ;
-critical_damping_rod = 2 * sqrt(mass_total * stiffness_rod) ;
-stiffness_wall = 100 ;
-critical_damping_wall = 2 * sqrt(mass_total * stiffness_wall) ;
-inertia_xx = 0.007 ;
-inertia_yy = 0.007 ;
-inertia_zz = 0.012 ;
-arm_length = 0.17 ;
-rotor_offset_top = 0.01 ;
-motor_constant = 8.54858e-06 ;
-moment_constant = 0.016 ;
-max_rot_velocity = 838 ;
-allocation_matrix = ...
-    [1 1 1 1
-     0 arm_length 0 -arm_length
-     -arm_length 0 arm_length 0
-     -moment_constant moment_constant -moment_constant moment_constant] ;
-mix_matrix = inv(motor_constant * allocation_matrix) ;
-air_density = 1.2041;
-drag_coefficient = 0.47;
-reference_area = pi * 75e-3^2;
-
-%% functions 
-function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
+function [ route,start,end_ ] = astar_3d( map, start_char, end_char)
     % Define the limits of the map
     if start_char == 'E'
         start = [1,1,1];
@@ -230,24 +164,4 @@ function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
        route = cat(1,route,parent_node.position);
     end
     route = flip(route);
-    %scale and add offests
-    x_scale = 0.65;
-    y_scale = 0.55;
-    z_scale = 0.75;
-
-    x_offset = 0.3;
-    y_offset = 0.5;
-    z_offset = 0.75;
-
-    % Make a copy of the route
-    route_scaled = route;
-
-    % Scale the copy
-    route_scaled(:,1) = (route_scaled(:,1) - 1) * x_scale + x_offset;
-    route_scaled(:,2) = (route_scaled(:,2) - 1) * y_scale + y_offset;
-    route_scaled(:,3) = (route_scaled(:,3) - 1) * z_scale + z_offset;
-
-    % Print the scaled route
-    route=route_scaled;
-    route
 end
