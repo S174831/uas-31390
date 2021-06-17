@@ -25,16 +25,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% INITIALIZATION
-
-clear
-close all
-clc
-
+clc;clear all; close all;
 %%
-
 load('uas_thrust_constants')
 load('uas_poly_traj')
-
 %% SIMULATION PARAMETERS
 
 route = [-2 0 1 ; -2 0 1];
