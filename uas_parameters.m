@@ -31,7 +31,7 @@ load('uas_thrust_constants')
 load('uas_poly_traj')
 %% SIMULATION PARAMETERS
 
-route = [-2 0 1 ; -2 0 1];
+route = [0 -2 0 ;  0 -2 1 ; 0 -2 2];
 wall_color = [0.8 0.2 0.2];
 sample_time = 4e-2;
 publish_rate = 1 * sample_time;
@@ -64,3 +64,4 @@ mix_matrix = inv(motor_constant * allocation_matrix) ;
 air_density = 1.2041;
 drag_coefficient = 0.47;
 reference_area = pi * 75e-3^2;
+run("uas_trajectory.m")
