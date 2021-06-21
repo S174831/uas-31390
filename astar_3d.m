@@ -3,21 +3,21 @@ function [ route,start,end_ ] = astar_3d( map, start_char, end_char)
     if start_char == 'E'
         start = [1,1,1];
     elseif start_char == 'F'
-        start = [0.3,0.5,0];
+        start = [2,1,1];
     elseif start_char == 'G'
-        start = [0.3,0.5,0];
+        start = [3,1,1];
     elseif start_char == 'H'
-        start = [0.3,0.5,0];
+        start = [4,1,1];
     end
     
     if end_char == 'A'
-        end_= [3,3,1];
+        end_= [1,5,1];
     elseif end_char == 'B'
-        end_ =[0.3,4,0];
+        end_ =[2,5,1];
     elseif end_char == 'C'
-        end_ =[0.3,4,0];
+        end_ =[3,5,1];
     elseif end_char == 'D'
-        end_=[0.3,0.5,0];
+        end_=[4,5,1];
     end 
     
     max_x = size(map,1);

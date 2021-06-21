@@ -7,11 +7,10 @@ clc
 % wall file is an obstacle. The position of the obstacle is defined in the
 % wall file by its x y z coordinates. The three last elements is
 % the size of the maze, the starting position and goal position
-load('maze/exercise_4_files/wall.txt')
-addpath('maze/exercise_4_files')
+load('auto_wall.txt')
 % If a different named file is used, then write it into the wall variable
 % e.g. wall = maze_2;
-wall = wall;
+wall = auto_wall;
 % Define the map size
 max_x = wall(length(wall) - 2, 1);
 max_y = wall(length(wall) - 2, 2);
@@ -26,7 +25,8 @@ for i = 1:(length(wall) - 3)
 end
 %% SIMULATION PARAMETERS
 
-[route,start,end_]=astar_3d1(map,'E','A');
+[route,start,end_]=astar_3d1(map,'H','A');
+route
 %makes sure end and start is not 1
 map(start(1), start(2), start(3)) = 0;
 map(end_(1), end_(2), end_(3)) = 0;
@@ -69,21 +69,21 @@ function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
     if start_char == 'E'
         start = [1,1,1];
     elseif start_char == 'F'
-        start = [0.3,0.5,0];
+        start = [2,1,1];
     elseif start_char == 'G'
-        start = [0.3,0.5,0];
+        start = [3,1,1];
     elseif start_char == 'H'
-        start = [0.3,0.5,0];
+        start = [4,1,1];
     end
     
     if end_char == 'A'
-        end_= [3,3,1];
+        end_= [1,5,1];
     elseif end_char == 'B'
-        end_ =[0.3,4,0];
+        end_ =[2,5,1];
     elseif end_char == 'C'
-        end_ =[0.3,4,0];
+        end_ =[3,5,1];
     elseif end_char == 'D'
-        end_=[0.3,0.5,0];
+        end_=[4,5,1];
     end 
     
     max_x = size(map,1);
@@ -237,7 +237,7 @@ function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
 
     x_offset = 0.3;
     y_offset = 0.5;
-    z_offset = 0.75;
+    z_offset = 0.45;
 
     % Make a copy of the route
     route_scaled = route;
@@ -248,6 +248,8 @@ function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
     route_scaled(:,3) = (route_scaled(:,3) - 1) * z_scale + z_offset;
 
     % Print the scaled route
+    route_length=length(route);
+    route_scaled = cat(1,route_scaled,[route_scaled(route_length,1),route_scaled(route_length,2),0.1]);
+    
     route=route_scaled;
-    route
 end
