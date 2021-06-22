@@ -2,6 +2,7 @@
 clear
 close all
 clc
+addpath("maze/exercise_4_files")
 %% Setup the map
 % Load the map from the wall file. Each line, except the two last, in the
 % wall file is an obstacle. The position of the obstacle is defined in the
@@ -25,7 +26,7 @@ for i = 1:(length(wall) - 3)
 end
 %% SIMULATION PARAMETERS
 
-[route,start,end_]=astar_3d1(map,'H','A');
+[route,start,end_]=astar_3d1(map,'E','C');
 route
 %makes sure end and start is not 1
 map(start(1), start(2), start(3)) = 0;
@@ -62,6 +63,8 @@ mix_matrix = inv(motor_constant * allocation_matrix) ;
 air_density = 1.2041;
 drag_coefficient = 0.47;
 reference_area = pi * 75e-3^2;
+
+%sim("uas_main.slx", 20);
 
 %% functions 
 function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
@@ -233,11 +236,11 @@ function [ route,start,end_ ] = astar_3d1( map, start_char, end_char)
     %scale and add offests
     x_scale = 0.65;
     y_scale = 0.55;
-    z_scale = 0.75;
+    z_scale = 0.6;
 
     x_offset = 0.3;
     y_offset = 0.5;
-    z_offset = 0.45;
+    z_offset = 0.60;
 
     % Make a copy of the route
     route_scaled = route;
