@@ -40,5 +40,5 @@ air_density = 1.2041;
 drag_coefficient = 0.47;
 reference_area = pi * 75e-3^2;
 
-%run("uas-demo-day/uas_get_hoops.m")
-%run("uas_trajectory.m")
+run("uas-demo-day/uas_get_hoops.m")
+run("uas_trajectory.m")

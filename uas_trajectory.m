@@ -1,50 +1,32 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% MIT License
-% 
-% Copyright (c) 2021 David Wuthier (dwuthier@gmail.com)
-% 
-% Permission is hereby granted, free of charge, to any person obtaining a copy
-% of this software and associated documentation files (the "Software"), to deal
-% in the Software without restriction, including without limitation the rights
-% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-% copies of the Software, and to permit persons to whom the Software is
-% furnished to do so, subject to the following conditions:
-% 
-% The above copyright notice and this permission notice shall be included in all
-% copies or substantial portions of the Software.
-% 
-% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-% SOFTWARE.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % % Initialization
-close all
-clear
-clc
+% close all
+% clear
+% clc
 
 % Trajectory generation
+% start_point = [double(0), double(-2), double(0)]
+% temp_point_1 = p_h1-(u_h1/10)
+% temp_point_2 = p_h1+(u_h1/10)
 
-knots = [0 10];
-waypoints = cell(1,2);
-waypoints{1} = [0 ; -2 ; 0];
+
+
+knots = [0 5 10];
+waypoints = cell(1,3);
+waypoints{1} = [0;-2;2]
+
+waypoints{2} = [0.43;-0.10;1.31]
 %waypoints{2} = [0 ; -2 ; 3];
-waypoints{2} = [0 ; -2 ; 2];
+waypoints{3} = [0.23;-0.1;1.3]
 % Fix this...
 order = 7;
-corridors.times = [2 4];
-corridors.x_lower = [-0.25 2.75];
-corridors.x_upper = [0.25 3.25];
-corridors.y_lower = [-3.1 -1.75];
-corridors.y_upper = [-2.9 -2.25];
-corridors.z_lower = [2 2];
-corridors.z_upper = [3 3];
+corridors.times = [1];
+corridors.x_lower = [-1];
+corridors.x_upper = [1];
+corridors.y_lower = [-3];
+corridors.y_upper = [-1];
+corridors.z_lower = [0];
+corridors.z_upper = [3];
 % ...until here
 make_plots = true;
 
